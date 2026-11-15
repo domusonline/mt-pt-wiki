@@ -14,7 +14,7 @@
         },
         {
           "title": "Rede",
-          "pages": ["rede/zero-cost-hop"]  
+          "pages": ["rede/zero-cost-hop","rede/mqtt"]  
         },
         {
           "title": "Software da Comunidade",

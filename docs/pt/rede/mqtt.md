@@ -1,5 +1,5 @@
 ---
-title: MQTT - Guia completo
+title: MQTT - Um Guia
 description: Explicação de todos os aspectos em torno do uso do MQTT em Meshtastic
 ---
 

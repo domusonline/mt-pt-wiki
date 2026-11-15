@@ -1,5 +1,5 @@
 ---
-title: Zero Cost Hop - Trabalhar com mais hops
+title: Zero Cost Hop
 description: Explicação do que é o Zero Cost Hop, o que pretende resolver e como se configura.
 ---
 
