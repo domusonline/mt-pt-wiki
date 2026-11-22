@@ -86,6 +86,7 @@ Passivo
 
 ### MQTT activo no Android
 Aceder à configuraçao, procurar por módulos e escolher o módulo MQTT:
+
 ![Configuraçã](../../../assets/android_config_settings.jpg)
 
 ![Configuração de Módulos](../../../assets/android_config_modules.jpg)
@@ -98,6 +99,7 @@ Para activar o proxy pelo telefone (nós sem WiFi):
 
 ### MQTT activo no iOS
 Nas configurações, aceder às configurações dos módulos e escolher o MQTT:
+
 ![Configurações de Módulos](../../../assets/ios_config_mqtt_1.png)
 
 ![Módulo MQTT](../../../assets/ios_config_mqtt_2.png)
@@ -139,11 +141,11 @@ Configuração de Upllink e Downlink em canais em iOS:
 
 Dada a complexidade do tema vamos tentar ver numa tabela quando uma mensagem em canais será enviada ao MQTT ou não:
 
-| Configuração do Emissor | Emissor Activo | Emissor Passivo | Hop c/ Uplink no canal | Hop s/ Uplink no canal |  
-| --- | --- | ---| --- |  
-| **OK to MQTT OFF** | n/a (ver Uplink)| Não Envia | Não Envia | Não Envia |  
-| **OK to MQTT ON** | n/a (ver Uplink) |Não Envia | Envia | Não Envia |  
-| **Uplink no canal ON** | Envia | Não Envia | n/a (Ver OK to MQTT) | Não Envia |  
+| **Configuração do Emissor** | **Emissor Activo** | **Emissor Passivo** | **Hop c/ Uplink no canal** | **Hop s/ Uplink no canal** |  
+| --- | --- | --- | --- | --- |
+| **OK to MQTT OFF** | n/a (ver Uplink) | Não Envia | Não Envia | Não Envia |  
+| **OK to MQTT ON** | n/a (ver Uplink) | Não Envia | Envia | Não Envia |  
+| **Uplink no canal ON** |  Envia | Não Envia | n/a (Ver OK to MQTT) | Não Envia |  
 | **Uplink no canal OFF** | Não Envia | Não Envia | n/a ( Ver o OK to MQTT) | Não Envia |
 
 As mensagens privadas são tratadas de forma ligeiramente diferente. Não estando num canal não há um "Uplink/Downlink" associado a elas, e por opção no código do firmware, são enviadas se o MQTT receber mensagens encriptadas (que é o caso em Portugal).
