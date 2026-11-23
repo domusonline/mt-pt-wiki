@@ -5,7 +5,7 @@ description: Explicação de todos os aspectos em torno do uso do MQTT em Meshta
 
 ---
 ## Se tem pressa
-O MQTT é um protocolo de troca de mensagens numa rede TCP/IP (local ou Internet). O Meshtastic pode ter alguns rádios ligados a um servidor MQTT e pode passar mensagens por rádio frequência (RF) e por MQTT. O ojectivo do MQTT é aumentar o alcance da rede para pontos onde o RF ainda não chegue, ou em situações de calamidade ou catástrofe permitir ter uma rede híbrida com o maior alcance possível. Serve também para monitorização da rede, recepção de informação para identificar nós, localizá-los no mapa e outras possíveis integrações.
+O MQTT é um protocolo de troca de mensagens numa rede TCP/IP (local ou Internet). O Meshtastic pode ter alguns rádios ligados a um servidor MQTT e pode passar mensagens por rádio frequência (RF) e por MQTT. O objectivo do MQTT é aumentar o alcance da rede para pontos onde o RF ainda não chegue, ou em situações de calamidade ou catástrofe permitir ter uma rede híbrida com o maior alcance possível. Serve também para monitorização da rede, recepção de informação para identificar nós, localizá-los no mapa e outras possíveis integrações.
 
 A ligação ao MQTT é totalmente opcional.  
 Há forma de indicar que não queremos usar MQTT e existem canais de mensagens onde não é sequer possível usar MQTT.  
@@ -15,12 +15,12 @@ Há forma de indicar que não queremos usar MQTT e existem canais de mensagens o
 
 ## Para que serve o MQTT numa rede RF?
 
-A pergunta faz todo o sentido e à primeira vista pode parecer um erro ou "batota". E para sermos claros o tema não é pacífico. Listamos algumas das vantagens de ter MQTT numa rede que se pretende alternativa:
+A pergunta faz todo o sentido, pois numa rede que se quer alternativa quando os meios de comunicação normais falharem, não parece intuitivo usar um desses meios. Por isso listamos algumas das vantagens de ter MQTT numa rede que se pretende alternativa:
 
 *   O MQTT pode servir para monitorizar e estudar a rede. Isto é prática habitual mesmo em redes mesh que não permitem a passagem de mensagens por MQTT.
 *   O MQTT permite ligar zonas isoladas onde o sinal RF ainda não chegue. Isso permite desenvolver a rede num local, levando mais pessoas a aderir o que expandirá o raio de cobertura de sinal RF dessa zona, levando em última instância à junção de zonas, ponto a partir do qual o MQTT se poderá tornar dispensável.
-*   Num caso de calamidade ou catástrofe é muito natural que o que funcionava bem em RF possa ter quebras de continuidade devido à destruição ou avaria de rádios que faziam a ligação a outras zonas. Com a complexa cobertura de internet, há vários operadores e alternativas aos serviços tradicionais, usando satélites por exemplo, como a Starlink. A multiplicidade de meios de acesso aumentam a probabilidade que mesmo com cortes severos (como aconteceu em 2026 com a tempestade Kristin) existam pontos que mantenham a conectividade. Ou porque por sorte umas antenas 4G/5G não foram afectadas, ou porque a zona tem fibra enterrada, ou porque há utilizadores de Starlink (juntas de freguesia por exemplo). Havendo pontos com conectividade, se houver ainda uma rede mesh com o RF minimamente operacional a nível local, um utilizador Meshtastic que tenha acesso à Internet, pode através do MQTT, fazer a ponte com o resto da rede. Como alguém comentava numa das inúmeras discussões sobre o MQTT: "Se eu estiver enrascado, se conseguir pedir ajuda, quero lá saber se passou por MQTT/Internet, por sinais de fumo ou se foi só por RF". O objectivo é construir uma rede híbrida, que não dependa de Internet, mas que a possa utilizar se estiver disponível, para aumentar o seu alcance.
-*   O MQTT pode ser uma interface muito prática para integrar serviços extra na rede."Robots" de ajuda e outros mecanismos podem ser mais fáceis de desenvolver e mais fiáveis (garantindo maior cobertura) se usarem este método alternativo se interação.
+*   Num caso de calamidade ou catástrofe é muito natural que o que funcionava bem em RF possa ter quebras de continuidade devido à destruição ou avaria de rádios que faziam a ligação a outras zonas. Com a complexa cobertura de internet, há vários operadores e alternativas aos serviços tradicionais, usando satélites por exemplo, como a Starlink. A multiplicidade de meios de acesso aumentam a probabilidade que mesmo com cortes severos (como aconteceu em 2026 com a tempestade Kristin) existam pontos que mantenham a conectividade. Ou porque por sorte umas antenas 4G/5G não foram afectadas, ou porque a zona tem fibra enterrada, ou porque há utilizadores de Starlink (juntas de freguesia por exemplo). Havendo pontos com conectividade, se houver ainda uma rede mesh com o RF minimamente operacional a nível local, um utilizador Meshtastic que tenha acesso à Internet, pode através do MQTT, fazer a ponte com o resto da rede. O objectivo é construir uma rede híbrida, que não dependa de Internet, mas que a possa utilizar se estiver disponível, para aumentar o seu alcance.
+*   O MQTT pode ser uma interface muito prática para integrar serviços extra na rede."Robots" de ajuda e outros mecanismos podem ser mais fáceis de desenvolver e mais fiáveis (garantindo maior cobertura) se usarem este método alternativo de interação.
 *   O MQTT pode servir para encaminhar tráfego que não deva ocupar a rede RF (pelos escassos recursos que esta oferece). Imagine-se uma rede mesh semi-privada numa zona rural que pode estar até a trabalhar num modo diferente da rede Meshtastic geral. Para efeitos de recolha de dados de sensores, tracking de pessoas ou animais ou outra utilização desse género. A zona de recolha de dados pode não ter cobertura de Internet, ou ser demasiado dispendioso ou necessitar de demasiada energia usar aparelhos com capacidade de comunicar directamente via Internet. Mas essa zona de recolha pode eventualmente conseguir enviar os dados usando LoRa até uma zona com cobertura, e onde pode estar um rádio com acesso a um servidor MQTT. A partir daí os dados podem usar a Internet, e não serem um peso para a rede LoRa. No fundo permite uma utilização híbrida, podendo levar comunicação até onde não haja ou não seja conveniente ter cobertura Internet.
 *   O MQTT pode ser usado a título privado para integração com outros sistemas. Cada utilizador tem a liberdade de configurar um rádio seu para se ligar a um servidor de MQTT que pode ser público ou privado. Isto permite a integração da rede mesh com outros sistemas como Home Assistant usando um protocolo standard.
 *   O MQTT pode ser usado como interface entre dois segmentos de uma Mesh, que estejam segregados, por exemplo por operarem em frequências diferentes (868 Mhz, 433 Mhz ou 2.4Ghz) ou até em presets diferentes (Longfast e outro(s))
@@ -41,20 +41,28 @@ O Meshtastic em geral permite que qualquer rádio com acesso a uma rede TCP/IP p
 
 > O servidor (ou servidores) são mantidos e geridos pela equipa de curadores do Meshtastic.pt.
 
+> A implementação do MQTT segue os princípios pelos quais se rege a rede (ver [Carta de princípios](https://meshtastic.pt/about/letterprinciples)) e pode ser usado, ou não, consoante os modos de configuração usados e propostos para a rede (ver [modos de funcionamento](https://meshtastic.pt/getstarted/modes))
+
 >O servidor MQTT aceita ligações usando um utilizador e palavra-chave conhecidos. 
 
->As mensagens são publicadas nos seu formato encriptado  Como tal, o tráfego enviado ao MQTT tem a mesma segurança que o que circula via RF.
+>As mensagens são publicadas no seu formato encriptado  Como tal, o tráfego enviado ao MQTT tem a mesma segurança que o que circula via RF:
+>- Mensagens de canais com chave conhecida podem ser desencriptadas.
+>- Mensagens de canais com chaves não conhecidas não podem ser desencriptadas.
+>- Mensagens privadas e directas entre rádios só podem ser desencriptadas com a chave privada do rádio de destino.
+>- Os metadados como a origem e o destino (IDs dos rádios), horas de envio, hops iniciais e outros não são encriptados e são visíveis no MQTT/Malha
 
->O MQTT permite o envio (Uplink) e a recepção (Downlink) de mensagens sem alterações. Em outras redes Meshtastic não é permitido o Downlink (Espanha), ou o número de Hops disponíveis em Downlink é alterado para zero, impedindo assim a sua retransmissão por RF (servidor internacional).
 
->O tráfego que chega ao MQTT é temporariamente armazenado e disponibilizado num sitio na Internet: [Malha](https://malha.meshtastic.pt) muito útil na monitorização e estudo da rede. As mensagens de canais públicos podem ser consultadas por quem não é utilizador da rede, algo que qualquer pessoa com um aparelho SDR (*software defined radio*) poderia fazer.
+
+>O MQTT permite o envio (Uplink) e a recepção (Downlink) de mensagens sem alterações. Em outras redes Meshtastic não é permitido o Downlink (Espanha), ou o número de Hops disponíveis em Downlink é alterado para zero (*zero-hop policy*), impedindo assim a sua retransmissão por RF (servidor internacional).
+
+>O tráfego que chega ao MQTT é temporariamente armazenado e disponibilizado num sítio na Internet: [Malha](https://malha.meshtastic.pt) muito útil na monitorização e estudo da rede. As mensagens de canais públicos (com chave conhecida) podem ser consultadas por quem não é utilizador da rede. Isso pode levantar algumas questões de privacidade, mas esse "espreitar" é algo que qualquer pessoa com um aparelho SDR (*software defined radio*) poderia fazer.
 
 >Os donos de rádios podem definir que canais decidem enviar ou receber para o/do MQTT. Os rádios só enviam para o MQTT os canais que conheçam e as mensagens ponto a ponto.
 
 >Qualquer utilizador tem a liberdade de indicar que não quer as suas mensagens enviadas para o MQTT. Mas há duas coisas a ter em conta:
 >
 >1.  Se o servidor configurado num rádio tiver um endereço "privado" (para os "techies", isto significa ter um endereço nas redes que não são "roteáveis" na Internet como 10.x.x.x, 192.168.x.x, 172.16 .x.x a 172.31.x.x) esta "indicação" da origem não é respeitada (as mensagens podem ser enviadas, mesmo que o utilizador dê a indicação que não). 
->2.  Expandido o tema acima, e sendo o Meshtastic um sistema de código aberto, é sempre possível alterar o firmware para não respeitar esta indicação. Como em muitos outros aspectos, isto é uma rede cooperativa e está altamente exposta a comportamentos diferentes dos formalmente propostos.
+>2.  Expandindo o tema acima, e sendo o Meshtastic um sistema de código aberto, é sempre possível alterar o firmware para não respeitar esta indicação. Como em muitos outros aspectos, isto é uma rede cooperativa e está altamente exposta a comportamentos diferentes dos formalmente propostos.
 
 
 > Qualquer utilizador tem a liberdade de recusar tráfego que tenha passado pelo MQTT (não recomendado, explicado noutra secção).
@@ -85,13 +93,13 @@ Passivo
 ## Configuração
 
 ### MQTT activo no Android
-Aceder à configuraçao, procurar por módulos e escolher o módulo MQTT:
+Aceder à configuração, procurar por módulos e escolher o módulo MQTT:
 
 ![Configuraçã](../../../assets/android_config_settings.jpg)
 
 ![Configuração de Módulos](../../../assets/android_config_modules.jpg)
 
-![Módulo MQTTT](../../../assets/android_config_mqtt_enable.jpg)
+![Módulo MQTT](../../../assets/android_config_mqtt_enable.jpg)
 
 Para activar o proxy pelo telefone (nós sem WiFi):
 
@@ -110,6 +118,10 @@ Nas configurações, aceder às configurações dos módulos e escolher o MQTT:
 O Meshtastic disponibiliza também uma configuração que indica ao rádio que deve descartar qualquer mensagem que receba e que já tenha passado pelo MQTT. Os rádios conseguem ver isto, pois nos metadados das mensagens vem um campo que sinaliza se a mensagem já passou pelo MQTT. Este campo está marcado como "false" à partida. E assim se mantém até que um rádio a envie para o MQTT. O rádio que faz o Downlink muda-o para "true" antes de a retransmitir por RF, informando assim todos os seguintes rádios que a mensagem passou pelo MQTT. Podemos ver este campo na opção de depuração na opção Android (via_mqtt=false):
 
 ![trace-target-debug](../../../assets/trace-target-debug.jpg)
+Nos [modos recomendados](https://meshtastic.pt/getstarted/modes) é considerado não recomendado usar o modo de MQTT desligado que corresponde a activar esta opção. Há duas situações que devem ser analisadas para se perceber o impacto desta opção:
+
+- Se uma mensagem fôr enviada ao MQTT, a velocidade e distância alcançada poderá ser muito maior do que o caminho equivalente por RF. Ou seja, a mensagem por MQTT tenderá a chegar mais depressa que a mesma por RF. Se um rádio a descartar por estar marcada com "MQTT",  e se entretanto a receber por RF, esta poderá ser considerada duplicada e igualmente ignorada.
+- Um rádio que tenha o "Ignorar MQTT" activado, poderá cortar um caminho dessa mensagem, impedindo passagens entre regiões isoladas, ou entre diferentes frequências por exemplo. Neste caso haverá um conflito entre as escolhas do utilizador do rádio que ignora as mensagens marcadas com "MQTT" e outros utilizadores que permitam e desejem a passagem dessas mensagens. Em última instância a liberdade de escolha permanece (dentro do respeito pelos princípios), mas o contributo desse rádio para a rede ficará aquém do que poderia ser. E como explicado neste documento, há formas melhores de operar em RF.
 
 Configuração de "Disponibilizar no MQTT" e "Ignorar MQTT" em Android:
 
@@ -121,19 +133,17 @@ Configuração de "Disponibilizar no MQTT" e "Ignorar MQTT" em iOS:
 
 ### Configuração de canais
 
-Na configuração de canais, quando os adicionamos temos duas opções: Uplink e Downlink (traduções para Portguês ainda inconsistentes). Estas opções só são relevantes nos rádios que tenham MQTT Activo. **Se não estivermos ligados ao MQTT estas opções não têm qualquer efeito**. Estas opções controlam, ao nível do canal, se o rádio envia (Uplink) ou recebe (Downlink) mensagens para ou do MQTT. Há uma confusão frequente que sugere que o emissor, ao não marcar o Uplink, condiciona os rádios na rede a não enviarem as mensagens que origina naquele canal para o MQTT. **Isto não funciona assim. Não temos controlo ao nível do canal. Só ao nível geral com o "Disponibilizar no MQTT"**.
+Na configuração de canais, quando os adicionamos temos duas opções: Uplink e Downlink (traduções para Português ainda inconsistentes). Estas opções só são relevantes nos rádios que tenham MQTT Activo. **Se não estivermos ligados ao MQTT estas opções não têm qualquer efeito**. Estas opções controlam, ao nível do canal, se o rádio envia (Uplink) ou recebe (Downlink) mensagens para ou do MQTT. Há uma confusão frequente que sugere que o emissor, ao não marcar o Uplink, condiciona os rádios na rede a não enviarem as mensagens que origina naquele canal para o MQTT. **Isto não funciona assim. Não temos controlo ao nível do canal. Só ao nível geral com o "Disponibilizar no MQTT"**.
 
 Portanto quem define se as mensagens de um canal são enviadas para o MQTT é o dono de cada rádio ligado ao MQTT (Activo), não se sobrepondo isto à sinalização que venha na mensagem (se vier sem "Disponibilizar no MQTT", o rádio ter marcado o Uplink no canal não dita o envio da mensagem)
 
-Este é o motivo porque activar a opção de ignorar o tráfego que passou pelo MQTT é perigosa: Porque nós não controlamos a decisão dos outros, se alguém decide fazer o Uplink de uma mensagem, então a velocidade de propagação dessa mensagem será muito maior por MQTT que por RF. Isto quer dizer que uma mensagem que chegue a um nó por MQTT, se chegar por RF, será tendencialmente mais tarde. E chegando mais tarde será descartada como duplicada. Entretanto esse rádio já a terá retransmitido e quem a ignorar não a verá por RF muito provavelmente. Como referido noutra secção há formas mais eficazes de operar só em RF.
-
-Configuração de Upllink e Downlink em canais em Android:
+Configuração de Uplink e Downlink em canais em Android:
 
 ![android-channel-settings-list](../../../assets/android-channel-settings-list.jpg)
 
 ![android-channel-settings](../../../assets/android-channel-settings.jpg)
 
-Configuração de Upllink e Downlink em canais em iOS:
+Configuração de Uplink e Downlink em canais em iOS:
 
 ![ios-channel-settings](../../../assets/ios-channel-settings.png)
 
@@ -150,7 +160,7 @@ Dada a complexidade do tema vamos tentar ver numa tabela quando uma mensagem em 
 
 As mensagens privadas são tratadas de forma ligeiramente diferente. Não estando num canal não há um "Uplink/Downlink" associado a elas, e por opção no código do firmware, são enviadas se o MQTT receber mensagens encriptadas (que é o caso em Portugal).
 
-Parece muito complexo? Então simplifiquemos numa só frase: Uma mensagem só será enviada ao MQTT se o node emissor estiver como activo e tiver o Uplink no canal (ou se fôr uma mensagem privada), ou se o node que a vai retransmitir tiver o canal definido, tiver Uplink no canal e o emissor tiver "Disponibilizar no MQTT" "on" (ou se fôr uma mensagem privada).
+Parece muito complexo? Então simplifiquemos numa só frase: Uma mensagem só será enviada ao MQTT se o node emissor estiver como activo e tiver o Uplink no canal (ou se for uma mensagem privada), ou se o node que a vai retransmitir tiver o canal definido, tiver Uplink no canal e o emissor tiver "Disponibilizar no MQTT" "on" (ou se for uma mensagem privada).
 
 Outras formas de colocar o tema:
 
@@ -170,7 +180,7 @@ Daqui salta a necessidade óbvia de ter visibilidade e entender o MQTT. Esta nec
 
 Um dos requisitos básicos é podermos entender se uma mensagem que nos chega passou ou não pelo MQTT. Infelizmente a resposta depende da plataforma que usamos. Na aplicação "Android" (incluí versões para Windows e Linux) e no cliente Web isto é extremamente fácil. Infelizmente em iOS não há forma de ver se uma mensagem passou por MQTT. Em Android:
 
-![Pasted image](../../../assets/msg-com-mqtt.png)
+![Mensagem com MQTT](../../../assets/msg-com-mqtt.png)
 
 No rodapé da mensagem, assumindo que não foi directa (nesse caso mostraria níveis de SNR e RSSI) temos o símbolo de "hops" (o coelho) À sua direita temos o número de hops, e se tiver passado por MQTT teremos uma nuvem à esquerda. Portanto, a mensagem acima passou pelo MQTT. Note-se que passar por MQTT não implica que a mensagem não possa chegar só por RF.
 
@@ -188,11 +198,11 @@ Quando estamos a testar se chegamos a determinado ponto é muito habitual usarmo
 
 ![Pasted image](../../../assets/trace-com-mqtt.png)
 
-Ora, um rádio que faça o Downlink de uma mensagem do MQTT, não terá SNR associado, pois isso só existe em RF. Sendo assim, colocou-se o problema de como representar isso? Infelizmente a decisão foi mostrar "0.0 dB" como aparece no segundo salto. Infelizmente porquê? Em LongFast o SNR varia entre cerca de -21dB até cerca de 7.5dB. O valor varia portanto entre um valor negativo e um valor positivo. Ora sendo assim, por regra matemática, o 0.0 é um valor possível. A precisão usada (0.25dB) implica que para o intervalo apresentado teremos 114 valores possíveis, o que estatisticamente faz com que 0.0dB tenha uma probabilidade baixa de ocorrer (assumindo que todos os valores teriam a mesma probabilidade o que não será verdade). Mas em todo o caso é um valor válido, pelo que a sua escolha foi um erro, por poder causar interpretações dúbias. Mas na maioria dos casos, quando vemos um salto de 0.0dB num trace, é muito provável que tenha sido um salto via MQTT. Na imagem acima, o rádio "Mesthtastic f58c" fez o Uplink e o "DrEvil" fez o Downlink.
+Ora, um rádio que faça o Downlink de uma mensagem do MQTT, não terá SNR associado, pois isso só existe em RF. Sendo assim, colocou-se o problema de como representar isso? A opção por usar o valor 0.0dB pode confundir-se com um valor válido de SNR (que pode variar de negativo a positivo). Os intervalos válidos de SNR variam com os presets do Meshtastic, e são representados com precisão de 0.25dB. O valor 0.0dB usado para sinalizar salto por MQTT é portanto ambíguo, mas na grande maioria dos casos, quando vemos um salto de 0.0dB num trace, é muito provável que tenha sido um salto via MQTT. Isto poderá sempre ser validado no sítio [Malha](https://malha.meshtastic.pt) Na imagem acima, o rádio "Mesthtastic f58c" fez o Uplink e o "DrEvil" fez o Downlink.
 
-Já houve tentativas de corrigir isto e não está descartada a possibilidade que ainda de venha a corrigir, permitindo mostrar "MQTT" em vez de um valor em dBs.
+Já houve tentativas de corrigir isto e não está descartada a possibilidade que ainda se venha a corrigir, permitindo mostrar "MQTT" em vez de um valor em dBs.
 
-**Nota**: Foge um pouco ao tema, mas o Meshtastic também pode encaminhar mensagens por UDP (variante do TCP/IP) e esses saltos são também representados por 0.0dB nos traces. Um salto por UDP não activa a nuvem no rodapé das mensagens.
+**Nota**: Foge um pouco ao tema, mas o Meshtastic também pode encaminhar mensagens por [UDP](https://pt.wikipedia.org/wiki/Protocolo_de_datagrama_do_usu%C3%A1rio) e esses saltos são também representados por 0.0dB nos traces. Um salto por UDP não activa a nuvem no rodapé das mensagens.
 
 Por curiosidade, e chamando a atenção para que uma mensagem não pode passar duas vezes pelo MQTT podemos ver este trace curioso:
 
@@ -202,7 +212,7 @@ Como se pode reparar, existem dois saltos com 0.0dB. E como referido, uma mensag
 
 ## Utilização sem MQTT
 
-A recomendação em Portugal é usar o MQTT passivo, ou activo caso não tenha ligação RF à rede. Mas surge sempre a necessidade de fazer testes para desenvolver a conectividade RF, ver onde chegamos e ajudar a melhorar a rede. E eventualmente podemos não querer que as nossas mensagens vão parar ao sitio Malha. Tudo isto são motivos para evitar o uso de MQTT. Seguem-se algumas dicas para utilização sem MQTT e para testes:
+A recomendação em Portugal é usar o MQTT passivo, ou activo caso não tenha ligação RF à rede. Mas surge sempre a necessidade de fazer testes para desenvolver a conectividade RF, ver onde chegamos e ajudar a melhorar a rede. E eventualmente podemos não querer que as nossas mensagens vão parar ao sítio Malha. Tudo isto são motivos para evitar o uso de MQTT. Seguem-se algumas dicas para utilização sem MQTT e para testes:
 
 ### Enviar mensagens sem MQTT
 
@@ -215,7 +225,7 @@ Neste momento e após vários pedidos, o servidor MQTT em Portugal recusa mensag
 
 ### Traçar rota sem MQTT
 
-O objectivo de traçar rota é ver se chegamos a um nó. Mas na realidade o trace só nos é retornado se fôr e voltar. Pode só chegar, e se a resposta não nos chegar não temos visibilidade que chegou. Uma forma de testar caminhos RF e ao mesmo tempo maximizar a possibilidade de o traço de rota se concluir com sucesso é:
+O objectivo de traçar rota é ver se chegamos a um nó. Mas na realidade o trace só nos é retornado se for e voltar. Pode só chegar, e se a resposta não nos chegar não temos visibilidade que chegou. Uma forma de testar caminhos RF e ao mesmo tempo maximizar a possibilidade de o traço de rota se concluir com sucesso é:
 
 1.  Desligar o MQTT Activo (evita que enviemos a mensagem pelo MQTT)
 2.  Desligar o "Disponibilizar no MQTT" (evita que outros rádios enviem a nossa mensagem para o MQTT)
@@ -242,19 +252,21 @@ Segundo o referido neste documento:
 | CLI | Canal 0, ou --ch-index se usado |
 | iOS | Sempre no canal 0 |
 | Android | O canal onde o destino foi ouvido a última vez, ou o canal 0 |
-| Cliente Web | Canal pimário |
+| Cliente Web | Canal primário |
 | Menu rádio | Canal 0 |
 
 Ora, o Android é o mais esquisito de todos, mas o que nos interessa é o CLI. Com o CLI podemos escolher o canal de envio com a opção --ch-index:
 
-> mesh@meshhost: ./meshtastic --host domusonlineht-cl-8 --ch-index 6 --traceroute '!a544b10f'  
+> mesh@meshhost: ./meshtastic --host 192.168.1.20 --ch-index 6 --traceroute '!DeadBeef'  
 > Connected to radio  
-> Sending traceroute request to !a544b10f on channelIndex:6 (this could take a while)  
+> Sending traceroute request to !DeadBeef on channelIndex:6 (this could take a while)  
 > Route traced towards destination:  
-> !9c22d4b9 --> !a544b10f (6.25dB)  
+> !b0a1de1a --> !DeadBeef(6.25dB)  
 > Route traced back to us:  
-> !a544b10f --> !9c22d4b9 (6.5dB)  
+> !DeadBeef --> !b0a1de1a (6.5dB)  
 > mesh@meshhost:
+
+*Nota: Os dados usados para endereço IP e identificação de nós são meramente ilustrativos*
 
 A configuração dos canais na origem (canal 6 é o Portugal_RF):
 
@@ -266,4 +278,4 @@ Configuração dos canais no destino (Portugal_RF é o canal 3):
 
 E o debug da mensagem no destino, indicando o canal 3:
 
-![trace-target-debug](../../../assets/trace-target-debug.jpg)/
+![trace-target-debug](../../../assets/trace-target-debug.jpg)
